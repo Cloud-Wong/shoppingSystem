@@ -24,38 +24,7 @@
 
 
 <body>
-<%
-    List<Order> list = new ArrayList<Order>();
-  Connection conn = DataBaseUtil.getConnection();  
-  
-  System.out.println("成功加载MySQL驱动程序");  
 
-try {  
-    Statement stmt = conn.createStatement();  
-
-    String sql = "select * from good_order";  
-   
-    ResultSet rs = stmt.executeQuery(sql);// executeQuery会返回结果的集合，否则返回空值  
-
-    while(rs.next()){
-      Order order = new Order();
-      order.setId(rs.getInt("good_id"));
-      order.setName(rs.getString("good_name"));
-      order.setCountry(rs.getString("country"));
-      order.setAdress(rs.getString("adress"));
-      order.setReceiver(rs.getString("receiver"));
-      TimeZoneUtil t = new TimeZoneUtil();
-      order.setUtc(
-          t.getLocalTimeFromUTC(rs.getString("utc"))
-          );
-      
-      list.add(order);
-    }
-    }catch(Exception e){
-       System.out.println("MySQL操作错误");  
-         e.printStackTrace();  
-}
-%>
     <!--顶部导航条部分-->
    <div class="navbar-jumbotron navbar-inverse">  
     <nav class="nav nav-default ">
@@ -114,30 +83,36 @@ try {
     <th>订单时间</th>
   </tr>
 <%
-  for(int i=0;i<list.size();i++){
 
-      out.println("<tr>");
-        out.println("<td>");
-        out.println(list.get(i).getId());
-        out.println("</td>");
-        
-        out.println("<td>");
-        out.println(list.get(i).getName());
-        out.println("</td>");
-        
-        out.println("<td>");
-        out.println(list.get(i).getCountry());
-        out.println("</td>");
-        
-        out.println("<td>");
-        out.println(list.get(i).getAdress());
-        out.println("</td>");
-        
-        out.println("<td>");
-        out.println(list.get(i).getUtc());
-        out.println("</td>");
-      out.println("</tr>");
-  }
+	ShowOrder s = new ShowOrder();
+	
+	List<Order> list = s.getOrder();
+	
+	
+	for(int i=0;i<list.size();i++){
+
+	    out.println("<tr>");
+	      out.println("<td>");
+	      out.println(list.get(i).getId());
+	      out.println("</td>");
+	      
+	      out.println("<td>");
+	      out.println(list.get(i).getName());
+	      out.println("</td>");
+	      
+	      out.println("<td>");
+	      out.println(list.get(i).getCountry());
+	      out.println("</td>");
+	      
+	      out.println("<td>");
+	      out.println(list.get(i).getAdress());
+	      out.println("</td>");
+	      
+	      out.println("<td>");
+	      out.println(list.get(i).getUtc());
+	      out.println("</td>");
+	    out.println("</tr>");
+	}
 %>
 </table>
 </body>

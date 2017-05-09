@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.model.GoodsDao;
 import com.model.Order;
+
 import com.model.TimeZoneUtil;
 
 /**
@@ -52,11 +53,11 @@ public class addServlet extends HttpServlet {
 		order.setReceiver(request.getParameter("receiver"));
 	      TimeZoneUtil t = new TimeZoneUtil();
 		order.setUtc(t.getUTCTimeStr());
-		
+
 		GoodsDao goodsdao = new GoodsDao();
 		goodsdao.saveOrder(order);
-		
-		response.sendRedirect("index.html");
+
+response.sendRedirect("index.html");
 	}
 
 }

@@ -1,5 +1,11 @@
 package com.model;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Order {
 	private int good_id;   //标示id
 	private String good_name; //商品名
@@ -58,4 +64,6 @@ public class Order {
 	public void setUtc(String utc){
 		this.utc=utc;
 	}
+	
+	
 }
