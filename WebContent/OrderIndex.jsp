@@ -20,69 +20,20 @@
     <script src="js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>订单查询</title>
-  <style type="text/css">
-
-      p.version {
-        padding-top: 20px;
-        font-size: 12px;
-        color: #fff;
-        opacity: 0.5;
-      }
-
-      hr {
-        margin-right: 80px;
-        margin-left: 80px
-      }
-
-      footer {
-        margin-left: 80px;
-      }
-
-      .subtitle {
-        color:#fff;
-        margin-top: 30px;
-      }
-
-      a.nav-color {
-        color: #000;
-      }
-      .table-sty {
-
-      }
-    </style>
 </head>
 
 
 <body>
 <%
-  List<Order> list = new ArrayList<Order>();
-Connection conn = null;  
-
-String sql;  
-
-// MySQL的JDBC URL编写方式：jdbc:mysql://主机名称：连接端口/数据库的名称?参数=值  
-
-// 避免中文乱码要指定useUnicode和characterEncoding  
-
-String url = "jdbc:mysql://localhost:3306/test?"  
-
-        + "user=root&password=123456&useUnicode=true&characterEncoding=UTF8";  
+    List<Order> list = new ArrayList<Order>();
+  Connection conn = DataBaseUtil.getConnection();  
+  
+  System.out.println("成功加载MySQL驱动程序");  
 
 try {  
-
-    Class.forName("com.mysql.jdbc.Driver");// 动态加载mysql驱动   
-
-    System.out.println("成功加载MySQL驱动程序");  
-
-    // 一个Connection代表一个数据库连接  
-
-    conn = DriverManager.getConnection(url);  
-
-    // Statement里面带有很多方法，比如executeUpdate可以实现插入，更新和删除等  
-
     Statement stmt = conn.createStatement();  
 
-    sql = "select * from good_order";  
+    String sql = "select * from good_order";  
    
     ResultSet rs = stmt.executeQuery(sql);// executeQuery会返回结果的集合，否则返回空值  
 
@@ -95,18 +46,17 @@ try {
       order.setReceiver(rs.getString("receiver"));
       TimeZoneUtil t = new TimeZoneUtil();
       order.setUtc(
-    		  t.getLocalTimeFromUTC(rs.getString("utc"))
-    		  );
+          t.getLocalTimeFromUTC(rs.getString("utc"))
+          );
       
       list.add(order);
     }
-  	}catch(Exception e){
-  		 System.out.println("MySQL操作错误");  
+    }catch(Exception e){
+       System.out.println("MySQL操作错误");  
          e.printStackTrace();  
 }
 %>
-
- <!--顶部导航条部分-->
+    <!--顶部导航条部分-->
    <div class="navbar-jumbotron navbar-inverse">  
     <nav class="nav nav-default ">
       <div class="container">
@@ -149,10 +99,11 @@ try {
       </div>
     </nav>
   </div>
+    <!--顶部导航条结束-->
+    
+    <h2 align="center">订单查询</h2>
 
-  <div align="center">
-    <h2>订单查询结果</h2>
-  </div> 
+
 <div class="table-responsive">
 <table class="table table-hover table-bordered" style="margin: 30px;">
   <tr>
@@ -163,36 +114,31 @@ try {
     <th>订单时间</th>
   </tr>
 <%
-	for(int i=0;i<list.size();i++){
+  for(int i=0;i<list.size();i++){
 
-	    out.println("<tr>");
-	      out.println("<td>");
-	      out.println(list.get(i).getId());
-	      out.println("</td>");
-	      
-	      out.println("<td>");
-	      out.println(list.get(i).getName());
-	      out.println("</td>");
-	      
-	      out.println("<td>");
-	      out.println(list.get(i).getCountry());
-	      out.println("</td>");
-	      
-	      out.println("<td>");
-	      out.println(list.get(i).getAdress());
-	      out.println("</td>");
-	      
-	      out.println("<td>");
-	      out.println(list.get(i).getUtc());
-	      out.println("</td>");
-	    out.println("</tr>");
-	}
+      out.println("<tr>");
+        out.println("<td>");
+        out.println(list.get(i).getId());
+        out.println("</td>");
+        
+        out.println("<td>");
+        out.println(list.get(i).getName());
+        out.println("</td>");
+        
+        out.println("<td>");
+        out.println(list.get(i).getCountry());
+        out.println("</td>");
+        
+        out.println("<td>");
+        out.println(list.get(i).getAdress());
+        out.println("</td>");
+        
+        out.println("<td>");
+        out.println(list.get(i).getUtc());
+        out.println("</td>");
+      out.println("</tr>");
+  }
 %>
 </table>
-<hr>
-<footer>
-  <p>&copy; 2017 Company, VDream.</p>
-</footer>
-
 </body>
 </html>
