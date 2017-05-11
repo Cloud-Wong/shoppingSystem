@@ -56,8 +56,14 @@ public class addServlet extends HttpServlet {
 
 		GoodsDao goodsdao = new GoodsDao();
 		goodsdao.saveOrder(order);
-
-response.sendRedirect("index.html");
+//		ShowOrder s = new ShowOrder();
+//		
+//		List<Order> result = s.getOrder();
+//		request.setAttribute("list", result);
+//		RequestDispatcher view = 
+//				request.getRequestDispatcher("OrderIndex.jsp");
+//		view.forward(request, response);
+	response.sendRedirect("index.html");
 	}
 
 }

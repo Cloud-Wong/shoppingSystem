@@ -10,7 +10,7 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">-->
-  <title>VDream Showing</title>
+
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,12 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>订单查询</title>
+<%
+      //加载i18n资源文件，request.getLocale()获取访问用户所在的国家地区
+      ResourceBundle myResourcesBundle =
+      ResourceBundle.getBundle("properties.myproperties",request.getLocale());
+  %>
+<title><%=myResourcesBundle.getString("oTracking")%></title>
 </head>
 
 
@@ -39,14 +44,14 @@
            <span class="icon-bar"></span>
           </button>
 
-          <a href="#" class="navbar-brand nav-color">VDream Showing</a>
+          <a href="#" class="navbar-brand nav-color">VDream Shopping</a>
         </div>
 
         <div class="collapse navbar-collapse" id="ex1">
           <ul class="nav navbar-nav">
-            <li><a href="" class="nav-color">综述</a></li>
-            <li><a href="" class="nav-color">简述</a></li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle nav-color" data-toggle="dropdown">特点<span class="caret"></span></a>
+            <li><a href="" class="nav-color"><%=myResourcesBundle.getString("summary")%></a></li>
+            <li><a href="" class="nav-color"><%=myResourcesBundle.getString("briefing")%></a></li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle nav-color" data-toggle="dropdown"><%=myResourcesBundle.getString("characteristics")%><span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="">Chrome</a></li>
                 <li><a href="">FireFox</a></li>
@@ -54,14 +59,14 @@
                 <li><a href="">IE</a></li>
               </ul>
             </li>
-            <li><a href="" class="nav-color">关于</a></li>
+            <li><a href="" class="nav-color"><%=myResourcesBundle.getString("about")%></a></li>
           </ul>
           <!--搜索部分-->
           <form class="navbar-form navbar-right" role="search">
             <div class="form-group">
             <input type="text" class="form-control" placeholder="Search">
             </div>
-            <button type="submit" class="btn btn-default">Search</button>
+            <button type="submit" class="btn btn-default"><%=myResourcesBundle.getString("search")%></button>
           </form>          
         </div>
           
@@ -70,17 +75,17 @@
   </div>
     <!--顶部导航条结束-->
     
-    <h2 align="center">订单查询</h2>
+    <h2 align="center"><%=myResourcesBundle.getString("oTracking")%></h2>
 
 
 <div class="table-responsive">
 <table class="table table-hover table-bordered" style="margin: 30px;">
   <tr>
     <th>#</th>
-    <th>商品名</th>
-    <th>下单地区</th>
-    <th>收货地址</th>
-    <th>订单时间</th>
+    <th><%=myResourcesBundle.getString("product")%></th>
+    <th><%=myResourcesBundle.getString("area")%></th>
+    <th><%=myResourcesBundle.getString("address")%></th>
+    <th><%=myResourcesBundle.getString("otime")%></th>
   </tr>
 <%
 
